@@ -49,7 +49,7 @@ function loadDataFromFile() {
 loadDataFromFile();
 
 app.get('', (req, res) => {
-    res.sendFile('/login.html', { root: "public" });
+    res.sendFile('/index.html', { root: "public" });
 });
 
 // Routes
