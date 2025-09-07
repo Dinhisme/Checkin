@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ Thống Quản Lý Checkin</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    
+    <link rel="stylesheet" href="checkin.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 Hệ Thống Quản Lý Checkin</h1>
+            <p>Import Excel và nhập mã để checkin</p>
+        </div>
+
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showTab('manage')">📊 Quản Lý Danh Sách</button>
+            <button class="nav-tab" onclick="showTab('input')">🔍 Nhập Mã Checkin</button>
+        </div>
+
+        <div id="manage-tab" class="tab-content active">
+            <div class="upload-area">
+                <h3>📄 Import File Excel</h3>
+                <p style="margin-bottom: 25px;">Chọn file Excel với cấu trúc: MÃ, HỌ VÀ TÊN, GIỚI TÍNH, ĐỊA CHỈ, KHOA/PHÒNG, ĐƠN VỊ, CHECKIN</p>
+                <input type="file" id="excelFile" accept=".xlsx,.xls" />
+                <label for="excelFile" class="upload-btn">Chọn File Excel</label>
+            </div>
+
+            <div class="stats-container" id="statsContainer" style="display: none;">
+                <div class="stats-card">
+                    <div class="stats-number" id="totalCount">0</div>
+                    <div class="stats-label">Tổng Số Người</div>
+                </div>
+                <div class="stats-card">
+                    <div class="stats-number" id="checkedInCount">0</div>
+                    <div class="stats-label">Đã Checkin</div>
+                </div>
+                <div class="stats-card">
+                    <div class="stats-number" id="notCheckedInCount">0</div>
+                    <div class="stats-label">Chưa Checkin</div>
+                </div>
+            </div>
+
+            <div style="text-align: right; margin-bottom: 20px;">
+                <button class="export-btn" onclick="exportToExcel()" id="exportBtn" style="display: none;">💾 Xuất Excel</button>
+            </div>
+
+            <div class="table-container">
+                <table id="dataTable" style="display: none;">
+                    <thead>
+                        <tr>
+                            <th class="textcenter">MÃ</th>
+                            <th>HỌ VÀ TÊN</th>
+                            <th class="textcenter">GIỚI TÍNH</th>
+                            <th>ĐỊA CHỈ</th>
+                            <th>KHOA/PHÒNG</th>
+                            <th>ĐƠN VỊ</th>
+                            <th class="textcenter">CHECKIN</th>
+                            <th class="textcenter">Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="input-tab" class="tab-content">
+            <div class="input-container">
+                <h3>🔍 Nhập Mã để Checkin</h3>
+                <p>Sử dụng máy quét hoặc nhập mã thủ công để checkin</p>
+                
+                <div style="margin: 30px 0;">
+                    <input type="text" id="codeInput" placeholder="Quét hoặc nhập mã tại đây..." class="code-input" autofocus>
+                    
+                    <div>
+                        <button class="action-btn" onclick="processCode()">✅ Checkin</button>
+                        <button class="action-btn clear" onclick="clearInput()">🔄 Xóa</button>
+                    </div>
+                </div>
+
+                <div id="inputResult"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
