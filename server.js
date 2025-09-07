@@ -48,6 +48,10 @@ function loadDataFromFile() {
 }
 loadDataFromFile();
 
+app.get('', (req, res) => {
+    res.sendFile('/login.html', { root: "public" });
+});
+
 // Routes
 app.post("/upload-excel", upload.single("excelFile"), (req, res) => {
   try {
