@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hệ Thống Quản Lý Checkin</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-    
+
     <link rel="stylesheet" href="checkin.css">
 </head>
+
 <body>
     <div class="container">
         <div class="header">
-            <h1>🎯 Hệ Thống Quản Lý Checkin</h1>
+            <h1><img src="img/logo.webp" alt="Target Logo" class="header-logo"> Hệ Thống Quản Lý Checkin</h1>
             <p>Import Excel và nhập mã để checkin</p>
         </div>
 
@@ -23,7 +25,8 @@
         <div id="manage-tab" class="tab-content active">
             <div class="upload-area">
                 <h3>📄 Import File Excel</h3>
-                <p style="margin-bottom: 25px;">Chọn file Excel với cấu trúc: MÃ, HỌ VÀ TÊN, GIỚI TÍNH, ĐỊA CHỈ, KHOA/PHÒNG, ĐƠN VỊ, CHECKIN</p>
+                <p style="margin-bottom: 25px;">Chọn file Excel với cấu trúc: MÃ, HỌ VÀ TÊN, GIỚI TÍNH, ĐỊA CHỈ,
+                    KHOA/PHÒNG, ĐƠN VỊ, CHECKIN</p>
                 <input type="file" id="excelFile" accept=".xlsx,.xls" />
                 <label for="excelFile" class="upload-btn">Chọn File Excel</label>
             </div>
@@ -44,7 +47,8 @@
             </div>
 
             <div style="text-align: right; margin-bottom: 20px;">
-                <button class="export-btn" onclick="exportToExcel()" id="exportBtn" style="display: none;">💾 Xuất Excel</button>
+                <button class="export-btn" onclick="exportToExcel()" id="exportBtn" style="display: none;">💾 Xuất
+                    Excel</button>
             </div>
 
             <div class="table-container">
@@ -71,10 +75,11 @@
             <div class="input-container">
                 <h3>🔍 Nhập Mã để Checkin</h3>
                 <p>Sử dụng máy quét hoặc nhập mã thủ công để checkin</p>
-                
+
                 <div style="margin: 30px 0;">
-                    <input type="text" id="codeInput" placeholder="Quét hoặc nhập mã tại đây..." class="code-input" autofocus>
-                    
+                    <input type="text" id="codeInput" placeholder="Quét hoặc nhập mã tại đây..." class="code-input"
+                        autofocus>
+
                     <div>
                         <button class="action-btn" onclick="processCode()">✅ Checkin</button>
                         <button class="action-btn clear" onclick="clearInput()">🔄 Xóa</button>
@@ -88,4 +93,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>
