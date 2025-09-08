@@ -33,7 +33,7 @@ document.getElementById("excelFile").addEventListener("change", function (e) {
   const formData = new FormData();
   formData.append("excelFile", file);
 
-  fetch(`${window.location.origin}/upload-excel`, {
+  fetch("/upload-excel", {
     method: "POST",
     body: formData,
   })
@@ -131,7 +131,7 @@ function clearInput() {
 }
 
 function handleCode(code) {
-  fetch(`${window.location.origin}/checkin`, {
+  fetch("/checkin", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ code }),
@@ -140,7 +140,7 @@ function handleCode(code) {
     .then((result) => {
       if (result.success) {
         // Lấy lại dữ liệu mới nhất từ server
-        fetch(`${window.location.origin}/data`)
+        fetch("/data")
           .then((res) => res.json())
           .then((data) => {
             if (data.data && Array.isArray(data.data)) {
@@ -245,7 +245,7 @@ function exportToExcel() {
 }
 
 window.addEventListener("DOMContentLoaded", function () {
-  fetch(`${window.location.origin}/data`)
+  fetch("/data")
     .then((res) => res.json())
     .then((data) => {
       if (data.data && Array.isArray(data.data)) {
@@ -305,7 +305,7 @@ function saveEdit(index) {
 
   console.log("Dữ liệu cập nhật:", updated);
 
-  fetch(`${window.location.origin}/edit-person`, {
+  fetch("/edit-person", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ ma: person.MA, updated }),
@@ -318,7 +318,7 @@ function saveEdit(index) {
       console.log("Server response data:", data);
       if (data.success) {
         // Cập nhật dữ liệu mới từ server
-        fetch(`${window.location.origin}/data`)
+        fetch("/data")
           .then((res) => res.json())
           .then((newData) => {
             if (newData.data && Array.isArray(newData.data)) {

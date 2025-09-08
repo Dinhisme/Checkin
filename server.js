@@ -15,6 +15,8 @@ import {
   setDoc,
   updateDoc,
 } from "firebase/firestore";
+
+import { dirname } from "path";
 import { fileURLToPath } from "url";
 
 // Firebase configuration
@@ -41,16 +43,19 @@ const io = new Server(server, {
   },
 });
 
-app.use(express.static("public"));
 app.use(express.json());
 
-// Trang chủ
-app.get("", (req, res) => {
-  res.sendFile("/index.html", { root: "public" });
+// Sửa lại phần express.static
+app.use(express.static(path.join(__dirname, "public")));
+
+// Sửa lại route cho trang chủ
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
+// Sửa lại route cho login
 app.get("/login", (req, res) => {
-  res.sendFile("/login.html", { root: "public" });
+  res.sendFile(path.join(__dirname, "public", "login.html"));
 });
 
 // API đăng nhập
