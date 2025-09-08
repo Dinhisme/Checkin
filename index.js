@@ -40,8 +40,8 @@ const io = socketIo(server, {
   },
 });
 
-app.get("", (req, res) => {
-  res.sendFile("/index.html", { root: "public" });
+app.get("/", (req, res) => {
+  res.sendFile("index.html", { root: "./public" });
 });
 
 // Middleware

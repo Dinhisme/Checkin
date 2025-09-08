@@ -1,5 +1,8 @@
 let userData = [];
 
+// Thêm vào đầu file script.js
+// const socket = io(window.location.origin);
+
 // Tab switching
 function showTab(tabName) {
   document
