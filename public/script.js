@@ -305,7 +305,7 @@ function saveEdit(index) {
 
   console.log("Dữ liệu cập nhật:", updated);
 
-  fetch("/edit-person", {
+  fetch(`${window.location.origin}/edit-person`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ ma: person.MA, updated }),
