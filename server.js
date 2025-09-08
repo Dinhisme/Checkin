@@ -45,6 +45,9 @@ const io = new Server(server, {
 
 app.use(express.json());
 
+// Cấu hình CORS
+app.use(cors());
+
 // Sửa lại phần express.static
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -127,6 +130,9 @@ app.post("/upload-excel", upload.single("excelFile"), async (req, res) => {
 
 app.get("/data", async (req, res) => {
   try {
+    // Đặt header để chỉ định response là JSON
+    res.setHeader("Content-Type", "application/json");
+
     console.log("Đang lấy dữ liệu từ Firestore...");
     const usersRef = collection(db, "DataList");
     const querySnapshot = await getDocs(usersRef);
@@ -139,12 +145,16 @@ app.get("/data", async (req, res) => {
     });
 
     console.log("Tổng số dữ liệu:", userData.length);
-    res.json({ data: userData });
+    // Trả về đúng định dạng JSON
+    res.json({
+      success: true,
+      data: userData,
+    });
   } catch (error) {
     console.error("Lỗi khi lấy dữ liệu:", error);
     res.status(500).json({
+      success: false,
       error: error.message,
-      stack: error.stack,
     });
   }
 });

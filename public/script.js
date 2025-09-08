@@ -246,7 +246,17 @@ function exportToExcel() {
 
 window.addEventListener("DOMContentLoaded", function () {
   fetch("/data")
-    .then((res) => res.json())
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+      // Kiểm tra content-type
+      const contentType = res.headers.get("content-type");
+      if (!contentType || !contentType.includes("application/json")) {
+        throw new TypeError("Dữ liệu không phải định dạng JSON!");
+      }
+      return res.json();
+    })
     .then((data) => {
       if (data.data && Array.isArray(data.data)) {
         userData = data.data;
@@ -256,6 +266,14 @@ window.addEventListener("DOMContentLoaded", function () {
     })
     .catch((err) => {
       console.error("Không thể tải dữ liệu từ server:", err);
+      // Hiển thị thông báo lỗi cho người dùng
+      document.getElementById("tableBody").innerHTML = `
+        <tr>
+          <td colspan="8" style="text-align: center; color: red;">
+            Không thể tải dữ liệu. Vui lòng thử lại sau. Lỗi: ${err.message}
+          </td>
+        </tr>
+      `;
     });
 });
 
