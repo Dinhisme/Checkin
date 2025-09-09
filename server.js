@@ -30,6 +30,9 @@ const firebaseConfig = {
   measurementId: "G-4Y3KLXYER5",
 };
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
 const db = getFirestore(firebaseApp);
@@ -49,7 +52,7 @@ app.use(express.json());
 app.use(cors());
 
 // Sửa lại phần express.static
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, ".public")));
 
 // Sửa lại route cho trang chủ
 app.get("/", (req, res) => {
